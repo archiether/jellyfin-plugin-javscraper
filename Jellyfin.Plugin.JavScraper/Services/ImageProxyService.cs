@@ -187,13 +187,15 @@ namespace Jellyfin.Plugin.JavScraper.Services
         /// <param name="url">图片地址</param>
         private async Task<HttpResponseMessage?> CutImage(byte[] bytes, string url)
         {
-            _logger.LogInformation($"{nameof(CutImage)}: staring...");
+            _logger.LogInformation($"{nameof(CutImage)}: starting...");
             try
             {
                 using var ms = new MemoryStream(bytes);
                 ms.Position = 0;
                 using var inputStream = new SKManagedStream(ms);
-                using var bitmap = SKBitmap.Decode(inputStream);
+                //using var bitmap = SKBitmap.Decode(inputStream);
+                using var inputData = SKData.Create(inputStream);
+                using var bitmap = SKBitmap.Decode(inputData);
                 var h = bitmap.Height;
                 var w = bitmap.Width;
                 var w2 = h * 2 / 3; // 封面宽度
