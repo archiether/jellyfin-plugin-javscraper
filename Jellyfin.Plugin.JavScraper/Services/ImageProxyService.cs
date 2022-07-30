@@ -193,7 +193,6 @@ namespace Jellyfin.Plugin.JavScraper.Services
                 using var ms = new MemoryStream(bytes);
                 ms.Position = 0;
                 using var inputStream = new SKManagedStream(ms);
-                //using var bitmap = SKBitmap.Decode(inputStream);
                 using var inputData = SKData.Create(inputStream);
                 using var bitmap = SKBitmap.Decode(inputData);
                 var h = bitmap.Height;
